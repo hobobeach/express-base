@@ -1,5 +1,5 @@
 {
-  "name": "@eaj/express-base",
+  "name": "@hobobeach/express-base",
   "version": "0.1.0",
   "description": "",
   "main": "dist/server.js",
