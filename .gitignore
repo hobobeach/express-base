@@ -1,0 +1,53 @@
+node_modules
+.env*
+dist
+
+*.sql
+
+.DS_Store*
+
+*.pem
+
+# Claude Code
+# Commit .claude/settings.json, .claude/commands/, .claude/agents/, and CLAUDE.md
+# so the whole team shares them. Ignore only the per-user settings.
+.claude/settings.local.json
+
+# Other AI tooling (per-user state, not project config)
+.aider*
+.cursor/
+.codeium/
+.continue/
+.windsurf/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+
+# Test / coverage output
+coverage/
+*.lcov
+.nyc_output/
+
+# TypeScript / build caches
+*.tsbuildinfo
+.cache/
+
+# Editors / IDE
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+
+# Local scratch
+tmp/
+temp/
