@@ -1,4 +1,18 @@
 # @hobobeach/express-base
+
+
+            ^^                   @@@@@@@@@
+       ^^       ^^            @@@@@@@@@@@@@@@
+                            @@@@@@@@@@@@@@@@@@              ^^
+                           @@@@@@@@@@@@@@@@@@@@
+ ~~~~ ~~ ~~~~~ ~~~~~~~~ ~~ &&&&&&&&&&&&&&&&&&&& ~~~~~~~ ~~~~~~~~~~~ ~~~
+ ~         ~~   ~  ~       ~~~~~~~~~~~~~~~~~~~~ ~       ~~     ~~ ~
+   ~      ~~      ~~ ~~ ~~  ~~~~~~~~~~~~~ ~~~~  ~     ~~~    ~ ~~~  ~ ~~
+   ~  ~~     ~         ~      ~~~~~~  ~~ ~~~       ~~ ~ ~~  ~~ ~
+ ~  ~       ~ ~      ~           ~~ ~~~~~~  ~      ~~  ~             ~~
+       ~             ~        ~      ~      ~~   ~             ~
+------------------------------------------------
+
 A TypeScript-based Express.js starter template providing a solid foundation for building secure, production-ready REST APIs and web applications.
 
 This boilerplate comes pre-configured with authentication via Passport and JWT, password hashing with bcrypt, TypeORM with SQLite for data persistence, file uploads through Multer, and server-side rendering via Handlebars.
