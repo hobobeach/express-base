@@ -29,6 +29,16 @@ Optional:
 - `PORT` (default 3000; server auto-falls back to `port+1` on `EADDRINUSE`, see `src/server.ts:14-23`)
 - `DATABASE_NAME` (default `database.sqlite`, written to repo root)
 
+## Plugins
+
+This project was scaffolded from `@hobobeach/express-base`. Installed plugins are tracked in `package.json#hobobeachExpressBase.plugins`. Their inserted code is wrapped in `// PLUGIN <name> BEGIN` / `END` markers (or `<!-- ... -->` in `.hbs`); editing inside the markers is fine, but leave the markers themselves so the CLI knows not to double-apply if you re-run it.
+
+Add more plugins later with:
+
+```sh
+npx @hobobeach/express-base add <plugin>
+```
+
 ## Architecture
 
 ### Boot order

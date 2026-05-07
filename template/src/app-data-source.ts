@@ -5,6 +5,7 @@ export const AppDataSource = new DataSource({
     type: 'sqlite',
     database: process.env.DATABASE_NAME || 'database.sqlite',
     entities: [
+        // PLUGINS: entities
     ],
     logging: true,
     synchronize: true,

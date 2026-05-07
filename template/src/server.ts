@@ -6,6 +6,7 @@ const port = process.env.PORT || 3000;
 
 async function startServer() {
   await AppDataSource.initialize();
+  // PLUGINS: init
 
   const server = app.listen(port, () => {
     log(`Server is running at http://localhost:${port}.`);

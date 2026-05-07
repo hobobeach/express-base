@@ -1,0 +1,19 @@
+{
+  "name": "seo",
+  "description": "Adds /sitemap.xml, /robots.txt, and an SEO meta partial.",
+  "dependencies": {},
+  "devDependencies": {},
+  "envVars": {
+    "SITE_URL": "https://example.com"
+  },
+  "files": [
+    { "from": "files/src/routes/seo.ts", "to": "src/routes/seo.ts" },
+    { "from": "files/src/shared/sitemap.ts", "to": "src/shared/sitemap.ts" },
+    { "from": "files/views/partials/seo-meta.hbs", "to": "views/partials/seo-meta.hbs" }
+  ],
+  "patches": [
+    { "file": "src/app.ts", "anchor": "// PLUGINS: import", "position": "before", "snippet": "import { seoRouter } from './routes/seo';" },
+    { "file": "src/app.ts", "anchor": "// PLUGINS: routes", "position": "before", "snippet": "app.use('/', seoRouter);" },
+    { "file": "views/layouts/default.hbs", "anchor": "<!-- PLUGINS: head -->", "position": "before", "snippet": "{{> seo-meta}}" }
+  ]
+}

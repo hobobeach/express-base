@@ -22,6 +22,7 @@ log('Server is running in the ' + environment + ' environment.');
 
 import { jwtStrategy } from './shared/jwt';
 import { indexRouter } from './routes/index';
+// PLUGINS: import
 
 const app: Express = express();
 
@@ -36,6 +37,7 @@ app.engine('hbs', hbs({
 }));
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'hbs');
+// PLUGINS: view-helpers
 
 app.use(helmet({
   contentSecurityPolicy: {
@@ -49,8 +51,10 @@ app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ extended: true, limit: '5mb' }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
+// PLUGINS: middleware
 
 app.use('/', indexRouter);
+// PLUGINS: routes
 
 // Catch 404s and forward to error handler
 app.use((request: Request, response: Response, next: NextFunction) => {

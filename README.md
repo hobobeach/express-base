@@ -20,13 +20,28 @@ Pre-configured with Passport + JWT auth, bcrypt password hashing, TypeORM with S
 ## Scaffold a new project
 
 ```sh
-npx @hobobeach/express-base my-app
-cd my-app
-npm install
-npm run dev
+npx @hobobeach/express-base my-app           # interactive plugin prompt
+npx @hobobeach/express-base my-app --plugins=seo
+npx @hobobeach/express-base my-app --no-plugins
+cd my-app && npm install && npm run dev
 ```
 
-The CLI copies the template, sets a fresh random `JWT_SECRET` in `.env.development`, and renames the project's `package.json#name` to match your directory.
+The CLI copies the template, sets a fresh random `JWT_SECRET` in `.env.development`, renames the project's `package.json#name` to match your directory, and applies any selected plugins.
+
+## Plugins
+
+Opt-in features that emit real code into your project — once applied, the code is yours to edit.
+
+```sh
+npx @hobobeach/express-base list-plugins     # see what's available
+npx @hobobeach/express-base add seo          # add a plugin to an already-scaffolded project (run from inside it)
+```
+
+Available plugins:
+
+- **`seo`** — adds `GET /sitemap.xml`, `GET /robots.txt`, and a `seo-meta` Handlebars partial wired into `<head>`. Sets `SITE_URL` in `.env.development`.
+
+Plugins are tracked in `package.json` under `hobobeachExpressBase.plugins`, and their inserted code is wrapped in `// PLUGIN <name> BEGIN` / `END` markers so the CLI never double-applies.
 
 ## What you get
 

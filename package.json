@@ -1,12 +1,13 @@
 {
   "name": "@hobobeach/express-base",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "TypeScript Express starter template — scaffold a new project with `npx @hobobeach/express-base <project>`.",
   "bin": {
     "express-base": "bin/create.js"
   },
   "files": [
     "bin",
+    "plugins",
     "template/_gitignore",
     "template/_npmrc",
     "template/CLAUDE.md",

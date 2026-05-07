@@ -7,11 +7,15 @@ Guidance for working on **this repo** (the `@hobobeach/express-base` CLI + templ
 ```
 .
 ├── bin/create.js       # CLI entry; published as the `express-base` bin
+├── plugins/            # scaffold-time plugins (see "Plugins" below)
+│   └── seo/
+│       ├── plugin.json
+│       └── files/      # tree mirroring the project root, copied into scaffolded apps
 ├── template/           # everything copied into a scaffolded project
 │   ├── _gitignore      # renamed to .gitignore by the CLI (npm strips a literal .gitignore at the package root, but inside template/ this rename is just defensive)
 │   ├── _npmrc          # renamed to .npmrc by the CLI — npm always strips literal .npmrc files from published packages
 │   ├── CLAUDE.md       # guidance for the scaffolded project
-│   ├── package.json    # the project's package.json (CLI rewrites `name`)
+│   ├── package.json    # the project's package.json (CLI rewrites `name`, adds `hobobeachExpressBase` marker)
 │   ├── nodemon.json
 │   ├── tsconfig.json
 │   ├── public/ src/ views/
@@ -41,6 +45,40 @@ npm publish --access public  # first publish; scoped packages default to private
 ```
 
 The CLI itself has zero runtime deps (Node stdlib only) so `npx` stays fast. Don't add deps to root `package.json` — put them in `template/package.json` if they belong to the scaffolded app.
+
+## Plugins
+
+Plugins are scaffold-time generators. Each lives in `plugins/<name>/` with a `plugin.json` manifest and a `files/` tree whose paths mirror the project root. The CLI:
+
+1. Copies `files/*` into the scaffolded project.
+2. Applies `patches[]` — each patch finds an anchor comment in a template file and inserts a snippet wrapped in `// PLUGIN <name> BEGIN` / `END` markers above it.
+3. Merges `dependencies` / `devDependencies` into the project's `package.json` (existing versions win — never override the user).
+4. Appends `envVars` to `.env.development` under a `# <name> plugin` heading, skipping any key already present.
+5. Records the plugin name in `package.json#hobobeachExpressBase.plugins` so re-installation is a safe no-op.
+
+### Anchor inventory
+
+Template files carry these anchor comments. Don't remove them; new plugins should target one of these (or you'll need to add a new anchor):
+
+| File | Anchor |
+|---|---|
+| `template/src/app.ts` | `// PLUGINS: import` |
+| `template/src/app.ts` | `// PLUGINS: view-helpers` |
+| `template/src/app.ts` | `// PLUGINS: middleware` |
+| `template/src/app.ts` | `// PLUGINS: routes` |
+| `template/src/app-data-source.ts` | `// PLUGINS: entities` |
+| `template/src/server.ts` | `// PLUGINS: init` |
+| `template/views/layouts/default.hbs` | `<!-- PLUGINS: head -->` |
+
+Patches insert *before* the anchor line. Indentation is inherited from the anchor's own indent.
+
+### Authoring a plugin
+
+1. Create `plugins/<name>/plugin.json` — schema mirrors the existing `seo` plugin.
+2. Drop files into `plugins/<name>/files/` using paths relative to the project root.
+3. Each patch needs `file`, `anchor`, `position: "before"`, `snippet`. Multi-line snippets work (use `\n`).
+4. Test: `node bin/create.js /tmp/scratch --plugins=<name>` then `cd /tmp/scratch && npm install && npx tsc --noEmit`.
+5. The CLI pre-flights all patches before any side effects, so a missing anchor fails fast with no half-applied state.
 
 ## CLI invariants
 
