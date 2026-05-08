@@ -1,6 +1,6 @@
 {
   "name": "@hobobeach/express-base",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "description": "TypeScript Express starter template — scaffold a new project with `npx @hobobeach/express-base <project>`.",
   "bin": {
     "express-base": "bin/create.js"

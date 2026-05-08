@@ -40,6 +40,8 @@ npx @hobobeach/express-base add seo          # add a plugin to an already-scaffo
 Available plugins:
 
 - **`seo`** — adds `GET /sitemap.xml`, `GET /robots.txt`, and a `seo-meta` Handlebars partial wired into `<head>`. Sets `SITE_URL` in `.env.development`.
+- **`blog`** — adds a markdown-driven blog at `GET /blog`, `GET /blog/:slug`, `GET /blog/feed.xml` (RSS 2.0), and `GET /blog/sitemap.xml`. Posts are `.md` files with YAML frontmatter under `content/blog/`, rendered with `marked` + `gray-matter`. Sets `BLOG_TITLE` and `BLOG_DESCRIPTION` in `.env.development`.
+- **`traffic`** — logs every non-static HTTP request to a `request_logs` TypeORM table (method, path, query, status, duration, IP, user-agent, referer, content-length) and auto-prunes old rows. Sets `TRAFFIC_LOG_ENABLED`, `TRAFFIC_LOG_RETENTION_DAYS`, and `TRAFFIC_LOG_SKIP_PATHS` in `.env.development`.
 
 Plugins are tracked in `package.json` under `hobobeachExpressBase.plugins`, and their inserted code is wrapped in `// PLUGIN <name> BEGIN` / `END` markers so the CLI never double-applies.
 
