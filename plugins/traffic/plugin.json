@@ -1,0 +1,21 @@
+{
+  "name": "traffic",
+  "description": "Logs every HTTP request to a request_logs table via TypeORM, with retention.",
+  "dependencies": {},
+  "devDependencies": {},
+  "envVars": {
+    "TRAFFIC_LOG_ENABLED": "true",
+    "TRAFFIC_LOG_RETENTION_DAYS": "30",
+    "TRAFFIC_LOG_SKIP_PATHS": ""
+  },
+  "files": [
+    { "from": "files/src/entities/request-log.entity.ts", "to": "src/entities/request-log.entity.ts" },
+    { "from": "files/src/middlewares/traffic.ts",         "to": "src/middlewares/traffic.ts" }
+  ],
+  "patches": [
+    { "file": "src/app.ts", "anchor": "// PLUGINS: import", "position": "before", "snippet": "import { trafficLogger } from './middlewares/traffic';" },
+    { "file": "src/app.ts", "anchor": "// PLUGINS: middleware", "position": "before", "snippet": "app.use(trafficLogger);" },
+    { "file": "src/app-data-source.ts", "anchor": "// PLUGINS: data-source-import", "position": "before", "snippet": "import { RequestLog } from './entities/request-log.entity';" },
+    { "file": "src/app-data-source.ts", "anchor": "// PLUGINS: entities", "position": "before", "snippet": "RequestLog," }
+  ]
+}

@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm';
 import 'reflect-metadata';
+// PLUGINS: data-source-import
 
 export const AppDataSource = new DataSource({
     type: 'sqlite',

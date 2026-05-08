@@ -66,6 +66,7 @@ Template files carry these anchor comments. Don't remove them; new plugins shoul
 | `template/src/app.ts` | `// PLUGINS: view-helpers` |
 | `template/src/app.ts` | `// PLUGINS: middleware` |
 | `template/src/app.ts` | `// PLUGINS: routes` |
+| `template/src/app-data-source.ts` | `// PLUGINS: data-source-import` |
 | `template/src/app-data-source.ts` | `// PLUGINS: entities` |
 | `template/src/server.ts` | `// PLUGINS: init` |
 | `template/views/layouts/default.hbs` | `<!-- PLUGINS: head -->` |
