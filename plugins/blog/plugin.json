@@ -1,0 +1,26 @@
+{
+  "name": "blog",
+  "description": "Adds a markdown-driven blog at /blog with RSS feed and sitemap.",
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "marked": "^17.0.3"
+  },
+  "devDependencies": {},
+  "envVars": {
+    "BLOG_TITLE": "My Blog",
+    "BLOG_DESCRIPTION": "Latest posts and updates"
+  },
+  "files": [
+    { "from": "files/src/routes/blog.ts",         "to": "src/routes/blog.ts" },
+    { "from": "files/src/shared/blog-content.ts", "to": "src/shared/blog-content.ts" },
+    { "from": "files/views/blog.hbs",             "to": "views/blog.hbs" },
+    { "from": "files/views/blog-post.hbs",        "to": "views/blog-post.hbs" },
+    { "from": "files/views/partials/blog",        "to": "views/partials/blog" },
+    { "from": "files/public/assets/blog.css",     "to": "public/assets/blog.css" },
+    { "from": "files/content/blog",               "to": "content/blog" }
+  ],
+  "patches": [
+    { "file": "src/app.ts", "anchor": "// PLUGINS: import", "position": "before", "snippet": "import { blogRouter } from './routes/blog';" },
+    { "file": "src/app.ts", "anchor": "// PLUGINS: routes", "position": "before", "snippet": "app.use('/blog', blogRouter);" }
+  ]
+}
